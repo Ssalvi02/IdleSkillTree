@@ -16,6 +16,7 @@ public class UpgradeController : MonoBehaviour
     public string up_desc;
     public int up_price;
     public bool can_afford;
+    public bool bought = false;
     private string price_col;
     [SerializeField] private int n;
     // Start is called before the first frame update
@@ -81,22 +82,23 @@ public class UpgradeController : MonoBehaviour
         {
             affordManage();
             btn.interactable = false;
+            bought = true;
+            col.enabled = false;
             switch (n)
             {
-                case 0: //Mult 2
-                    cc.clicker_mult += 1;
-                    col.enabled = false;
+                case 0: //Mult 5
+                    cc.clicker_mult += 4;
                     break;
                 case 1: //Unlock t1
                     gc.activateTier();
                     gc.scr_unlock = true;
-                    col.enabled = false;
                     break;
                 case 2: //More RAM
                     cc.total_ram += 1024;
                     break;
                 case 3:
                     gc.prod20();
+                    gc.totalProdAdd();
                     break;
             }
         }

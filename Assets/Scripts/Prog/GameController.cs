@@ -12,8 +12,9 @@ public class GameController : MonoBehaviour
     public TextMeshPro ram_t;
     public ClckerController cc;
     public AutoController[] ac;
+    public UpgradeController[] uc;
     public GameObject up_ls;
-    public GameObject auto_ls;
+    public RectTransform auto_ls;
     public Button but_up;
     public Button but_auto;
     public TextMeshPro head;
@@ -27,20 +28,12 @@ public class GameController : MonoBehaviour
         number_a_t = GameObject.Find("Lines/LinePS").GetComponent<TextMeshPro>();
         up_ls = GameObject.Find("ScrollArea");
         ac = GameObject.Find("UpgradeMenu/Canvas/ScrollArea2/Mask/UpList").GetComponentsInChildren<AutoController>();
-
-        if(avaible_tier == 0)
-        {
-            for(int i =0; i < ac.Length; i++)
-            {
-                ac[i].gameObject.SetActive(false);
-            }
-        }
-
-        auto_ls = GameObject.Find("ScrollArea2");
+        uc = GameObject.Find("UpgradeMenu/Canvas/ScrollArea/Mask/UpList").GetComponentsInChildren<UpgradeController>();
+        auto_ls = GameObject.Find("ScrollArea2").GetComponent<RectTransform>();
         but_up = GameObject.Find("butt").GetComponent<Button>();
         but_auto = GameObject.Find("butt1").GetComponent<Button>();
         but_up.interactable = false;
-        auto_ls.SetActive(false);
+        auto_ls.anchoredPosition = new Vector2(900f, -18.89f);
         but_up.onClick.AddListener(buttonManageUp);
         but_auto.onClick.AddListener(buttonManageAuto);
     }
@@ -80,7 +73,7 @@ public class GameController : MonoBehaviour
         but_auto.interactable = true;
         but_up.interactable = false;
         up_ls.SetActive(true);
-        auto_ls.SetActive(false);
+        auto_ls.anchoredPosition = new Vector3(900f, -18.89f, 0f);
     }
 
     void buttonManageAuto()
@@ -90,7 +83,10 @@ public class GameController : MonoBehaviour
         but_auto.interactable = false;
         but_up.interactable = true;
         up_ls.SetActive(false);
-        auto_ls.SetActive(true);
+        if (uc[1].bought)
+        {
+            auto_ls.anchoredPosition = new Vector3(0f, -18.89f, 0f);
+        }
     }
 
     void changeHead(float r, float g, float b, string text)

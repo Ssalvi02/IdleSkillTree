@@ -15,8 +15,8 @@ public class AutoController : MonoBehaviour
     public TextMeshProUGUI[] quant_t;
     public string auto_name;
     private string auto_desc;
-    public int auto_price;
     public float production_per_sec;
+    public int auto_price;
     public int ram_cost;
     public int quantity = 0;
     public int tier;
@@ -47,7 +47,6 @@ public class AutoController : MonoBehaviour
             timer = 0;
         }
     }
-
     private void OnMouseOver()
     {
         setText();
