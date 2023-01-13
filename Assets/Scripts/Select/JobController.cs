@@ -16,6 +16,7 @@ public class JobController : MonoBehaviour
     public float t = 0f;
     public bool mouse_over = false;
     public bool mouse_down = false;
+    public bool job5unlocked = false;
 
     void Start()
     {
@@ -60,6 +61,16 @@ public class JobController : MonoBehaviour
             case 3:
                 txt.color = new Color(0.2313726f, 0.2862745f, 0.4431373f, 1f);
                 txt.text = "More <color=#7e2738>idle</color> playstyle";
+                break;
+            case 4:
+                if (job5unlocked)
+                {
+                    txt.color = new Color(0.2313726f, 0.2862745f, 0.4431373f, 1f);
+                    txt.text = "RULE THEM ALL";
+                    break;
+                }
+                txt.color = new Color(0f, 0f, 0f, 1f);
+                txt.text = "???";
                 break;
         }
     }
